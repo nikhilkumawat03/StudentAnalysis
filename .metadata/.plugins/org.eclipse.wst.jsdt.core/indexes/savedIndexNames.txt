@@ -1,0 +1,13 @@
+INDEX VERSION 1.4+/media/nikhil/Disk1_Vol3/EclipseProject/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+3600017777.index
+46560589.index
+922008400.index
+690734299.index
+3184621436.index
+177459458.index
+463100450.index
+215376385.index
+1825280328.index
+3134594665.index
+2287743908.index
+2060279168.index

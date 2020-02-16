@@ -1,0 +1,60 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>StudentData</title>
+</head>
+
+	<%@page import="java.util.ArrayList"%>
+	<%@page import="org.apache.spark.sql.Dataset"%>
+	<%@page import="org.apache.spark.sql.Row"%>
+	<%@page import="java.util.List"%>
+	<%@page import="entites.StudentEntity" %>
+	<%@page import="javax.persistence.*" %>
+	<%@page import="entites.ComputerNetwork" %>
+	<%@page import="java.math.BigDecimal" %>
+<body>
+	<h3>Student Information</h3>
+	<% StudentEntity studentsData = (StudentEntity)request.getAttribute("studentGenralInfo"); %>
+		
+		<% 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("databaseConnection");
+		EntityManager em = emf.createEntityManager();
+		Query query = em.createNativeQuery("SELECT  student_name FROM StudentLogin WHERE student_id LIKE \""+studentsData.getStudent_id()+"\"");
+		String student_name = (String)query.getSingleResult();
+		out.println("Student Name: " + student_name);
+		%> </br>
+		
+		<% out.println("Student_Id: " + studentsData.getStudent_id()); %> </br>
+		
+		<% out.println("Branch_Id: " + studentsData.getBranch_id());%> </br>
+		
+		<% out.println("Roll Number: " + studentsData.getRoll_no());%> </br>
+		
+		<%TypedQuery<ComputerNetwork> typedQuery = em.createNamedQuery("ComputerNetworksPerformance", ComputerNetwork.class);
+		typedQuery.setParameter("student_id", studentsData.getStudent_id());
+		
+		List<ComputerNetwork> subjectResult = typedQuery.getResultList();
+		%>
+		
+		<h3>Computer Network</h3>
+		
+		<%out.println("Overall Attendance: " + subjectResult.get(0).getAttendence()); %> </br>
+		<%out.println("Discipline Score: " + subjectResult.get(0).getDiscipline_score()); %> </br>
+		<%out.println("Doubt Asked: " + subjectResult.get(0).getDoubt_asked()); %> </br>
+		<%out.println("Visited Resources: " + subjectResult.get(0).getVisited_resources()); %> </br>
+		<%out.println("Internal Marks: " + subjectResult.get(0).getInternal_marks()); %> </br>
+		
+		
+		<%query = em.createNativeQuery("SELECT AVG(internal_marks) FROM currentComputerNetworks");
+		BigDecimal averageInternalMarks = (BigDecimal)query.getSingleResult();
+		out.println("Average Internal Marks: " + averageInternalMarks);
+		%></br>
+
+		<%query = em.createNativeQuery("SELECT predicted_marks FROM currentComputerNetworks WHERE student_id LIKE \""+studentsData.getStudent_id()+"\"");
+		  int predicted_marks = (int)query.getSingleResult();
+		  out.println("PredictedMarks: " + predicted_marks);
+		%>
+</body>
+</html>

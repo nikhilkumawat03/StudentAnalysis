@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;StudentAnalysisWithML_Vesrion3 (1)&apos; to &apos;StudentAnalysisWithML&apos;" description="Rename resource &apos;StudentAnalysisWithML_Vesrion3 (1)&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/StudentAnalysisWithML_Vesrion3 (1)" name="StudentAnalysisWithML" stamp="1581830204433" updateReferences="true"/>
+</session>
